@@ -1,0 +1,6 @@
+{
+   "cssmodules.camelCase": true,
+   "cSpellExt.enableDictionaries": ["spanish"],
+   "cSpell.language": "en,es",
+   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "javascriptreact"]
+}
