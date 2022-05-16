@@ -23,6 +23,8 @@ Plug 'ur4ltz/surround.nvim'
 
 Plug 'phaazon/hop.nvim'
 
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 call plug#end()
 
 lua << EOF
@@ -31,6 +33,7 @@ require('nvim_comment').setup{}
 require('lualine').setup()
 require('surround').setup {mappings_style = "surround"}
 require('hop').setup()
+require("indent_blankline").setup()
 EOF
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -315,3 +318,5 @@ inoremap jj <esc>
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 let g:dashboard_default_executive ='telescope'
+
+let g:indent_blankline_filetype = ['vim', 'javascript', 'javascriptreact']
