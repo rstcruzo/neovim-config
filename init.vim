@@ -17,12 +17,20 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
+Plug 'glepnir/dashboard-nvim'
+
+Plug 'ur4ltz/surround.nvim'
+
+Plug 'phaazon/hop.nvim'
+
 call plug#end()
 
 lua << EOF
 require('nvim-autopairs').setup{}
 require('nvim_comment').setup{}
 require('lualine').setup()
+require('surround').setup {mappings_style = "surround"}
+require('hop').setup()
 EOF
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -292,9 +300,18 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" Dashboard
+nnoremap <Leader>ss :<C-u>SessionSave<CR>
+nnoremap <Leader>sl :<C-u>SessionLoad<CR>
+
+" Hop
+nnoremap <Leader>j :HopChar2<CR>
+
 " better ESC
 inoremap jj <esc>
 
 " }}}
 
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
+let g:dashboard_default_executive ='telescope'
