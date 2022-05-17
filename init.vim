@@ -25,15 +25,45 @@ Plug 'phaazon/hop.nvim'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'jxnblk/vim-mdx-js'
+
+Plug 'tpope/vim-unimpaired'
+
+Plug 'folke/which-key.nvim'
+
+Plug 'aserowy/tmux.nvim'
+
 call plug#end()
 
 lua << EOF
 require('nvim-autopairs').setup{}
 require('nvim_comment').setup{}
 require('lualine').setup()
-require('surround').setup {mappings_style = "surround"}
+require('surround').setup {
+    mappings_style = "surround",
+    pairs = {
+        nestable = { b = { "(", ")" }, s = { "[", "]" }, B = { "{", "}" }, a = { "<", ">" } },
+        linear = { q = { "'", "'" }, t = { "`", "`" }, d = { '"', '"' }, i = { "*", "*" }, I = { "**", "**" } }
+        }
+    }
 require('hop').setup()
 require("indent_blankline").setup()
+require("which-key").setup()
+require("tmux").setup {
+    copy_sync = {
+        -- enables copy sync and overwrites all register actions to
+        -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+        enable = true,
+        },
+    navigation = {
+        -- enables default keybindings (C-hjkl) for normal mode
+        enable_default_keybindings = true,
+        },
+    resize = {
+        -- enables default keybindings (A-hjkl) for normal mode
+        enable_default_keybindings = true,
+        }
+    }
 EOF
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -283,6 +313,8 @@ let mapleader=" "   " leader is space
 " edit/reload vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
+
+nnoremap <leader>iv :so $MYVIMRC \| PlugInstall<CR>
 
 " Git gutter
 nnoremap ]h <Plug>(GitGutterNextHunk)
